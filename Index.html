@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Unidades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            background-image: url(https://www.eleconomista.com.mx/__export/1628567115364/sites/eleconomista/img/2021/08/09/miedo-a-las-matematicas.jpg_1014274486.jpg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        #converter {
+            background-color: #caffbf;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        select,
+        input[type="number"] {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #008404;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            position: center;
+            margin-left: 35%;
+            margin-top: 9px;
+
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        s #inputValue {
+            height: 15px;
+            width: 93px;
+            margin-left: 19px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="converter">
+        <h2>Conversor de Unidades</h2>
+        <div>
+            <label for="inputUnit">Unidad de entrada:</label>
+            <select id="inputUnit">
+                <option value="m">Metros</option>
+                <option value="km">Kilómetros</option>
+                <option value="cm">Centímetros</option>
+                <option value="in">Pulgadas</option>
+            </select>
+        </div>
+        <div>
+            <label for="inputValue">Valor a convertir:</label>
+            <input type="number" id="inputValue">
+        </div>
+        <div>
+            <label for="outputUnit">Unidad de salida:</label>
+            <select id="outputUnit">
+                <option value="m">Metros</option>
+                <option value="km">Kilómetros</option>
+                <option value="cm">Centímetros</option>
+                <option value="in">Pulgadas</option>
+            </select>
+        </div>
+        <div>
+            <button onclick="convert()">Convertir</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function convert() {
+            const inputUnit = document.getElementById("inputUnit").value;
+            const inputValue = parseFloat(document.getElementById("inputValue").value);
+            const outputUnit = document.getElementById("outputUnit").value;
+
+            let result;
+            switch (inputUnit) {
+                case "m":
+                    result = convertFromMeters(inputValue, outputUnit);
+                    break;
+                case "km":
+                    result = convertFromKilometers(inputValue, outputUnit);
+                    break;
+                case "cm":
+                    result = convertFromCentimeters(inputValue, outputUnit);
+                    break;
+                case "in":
+                    result = convertFromInches(inputValue, outputUnit);
+                    break;
+                default:
+                    result = "Unidad de entrada no válida";
+            }
+
+            document.getElementById("result").innerText = `Resultado: ${result} ${outputUnit}`;
+        }
+
+        function convertFromMeters(value, outputUnit) {
+            switch (outputUnit) {
+                case "m":
+                    return value;
+                case "km":
+                    return value / 1000;
+                case "cm":
+                    return value * 100;
+                case "in":
+                    return value * 39.3701;
+                default:
+                    return "Unidad de salida no válida";
+            }
+        }
+
+        function convertFromKilometers(value, outputUnit) {
+            switch (outputUnit) {
+                case "m":
+                    return value * 1000;
+                case "km":
+                    return value;
+                case "cm":
+                    return value * 100000;
+                case "in":
+                    return value * 39370.1;
+                default:
+                    return "Unidad de salida no válida";
+            }
+        } q
+
+        function convertFromCentimeters(value, outputUnit) {
+            switch (outputUnit) {
+                case "m":
+                    return value / 100;
+                case "km":
+                    return value / 100000;
+                case "cm":
+                    return value;
+                case "in":
+                    return value / 2.54;
+                default:
+                    return "Unidad de salida no válida";
+            }
+        }
+
+        function convertFromInches(value, outputUnit) {
+            switch (outputUnit) {
+                case "m":
+                    return value * 0.0254;
+                case "km":
+                    return value * 0.0000254;
+                case "cm":
+                    return value * 2.54;
+                case "in":
+                    return value;
+                default:
+                    return "Unidad de salida no válida";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
